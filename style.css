@@ -1,0 +1,22 @@
+* {
+  font: garamond;
+}
+
+.frame {
+  display: inline-block;
+  max-width: 75px;
+  margin: 20px;
+  border: 1px solid grey;
+}
+.pic {
+  max-width: 200px;
+}
+#img1 {
+  ;
+}
+#img2 {
+;
+}
+#img3 {
+  b;
+}
