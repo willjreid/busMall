@@ -25,8 +25,8 @@ Tasks:
 1) build HTML page to show three images at ~25% width of page (DONE)
 2) add event listener to each image (DONE)
 2a) use a constructor function to build an image for page display, including the image link, image name, file path, number of times displayed, number of times clicked.
-3) organize array to display a random sample from the list
-4) adjust get function so that images reload when an image is clicked
+3) organize array to display a random sample from the list (DONE)
+4) adjust get function so that images reload when an image is clicked (DONE)
 5) add statcounter.com link (DONE)
 5a) read statcounter.com stats to ensure the cycle stops at 25 clicks
 6) clear event listeners with a target.removeEventListner feature when 25 clicks has been reached
