@@ -9,4 +9,24 @@ I want to be able to review three products at a time and click on the item I wou
 So I can compare items in a relevant sample size.
 
 As a BusMall supplier
-I want focus group members to see a random sample of 
+I want focus group members to see a random sample of products for 25 iterations
+So I can draw conclusions about which products they prefer
+
+As a BusMall supplier
+I want to see data on the number of times an image has been displayed and the number of times it has been clicked
+So I can gauge the relative attractiveness of features.
+
+As a BusMall supplier
+I want to ensure that the same item does not appear on two pages in a row by tracking an attribute called lastDisplayed
+So the user can see fresh images for every click.
+
+
+Tasks:
+1) build HTML page to show three images at ~25% width of page
+2) add event listener to each image
+2a) use a constructor function to build an image for page display, including the image link, image name, file path, number of times displayed, number of times clicked.
+3) organize array to display a random sample from the list
+4) adjust get function so that images reload when an image is clicked
+5) add statcounter.com link to ensure the cycle stops at 25 clicks
+6) clear event listeners with a target.removeEventListner feature when 25 clicks has been reached
+7) build a list showing the items clicked on and the count of clicks.
