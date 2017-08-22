@@ -50,6 +50,7 @@ function renderThree () {
   };
   submit1.setAttribute('src', availForDisplay[randomOne].imgFilePath);
   submit1.setAttribute('alt', availForDisplay[randomOne].alt);
+  submit1.setAttribute('id', 'submit1');
   imgOne.src = availForDisplay[randomOne].imgFilePath;
   //imgOne.appendChild(firstImg);
   imgOne.id = availForDisplay[randomOne].id;
@@ -63,6 +64,9 @@ function renderThree () {
   while (randomOne === randomTwo || lastDisplayed.includes(randomTwo)) {
     randomTwo = Math.floor(Math.random() * availForDisplay.length);
   };
+  submit2.setAttribute('src', availForDisplay[randomTwo].imgFilePath);
+  submit2.setAttribute('alt', availForDisplay[randomTwo].alt);
+  submit2.setAttribute('id', 'submit2');
   imgTwo.src = availForDisplay[randomTwo].imgFilePath;
   // imgTwo.appendChild(secondImg);
   imgTwo.id = availForDisplay[randomTwo].id;
@@ -75,9 +79,14 @@ function renderThree () {
   while (randomThree === randomTwo || randomThree === randomOne || lastDisplayed.includes(randomThree)) {
     randomThree = Math.floor(Math.random() * availForDisplay.length);
   };
+  // submit3.setAttribute('src', availForDisplay[randomThree].imgFilePath);
+  // submit3.setAttribute('alt', availForDisplay[randomThree].alt);
+  // submit3.setAttribute('id', 'submit3');
   imgThree.src = availForDisplay[randomThree].imgFilePath;
   // imgThree.appendChild(thirdImg);
+  //imgThree.id = availForDisplay[randomThree].id;
   imgThree.id = availForDisplay[randomThree].id;
+
   lastDisplayed = [];
   lastDisplayed.push(availForDisplay[randomOne], availForDisplay[randomTwo], availForDisplay[randomThree]);
   console.log(availForDisplay);
@@ -89,6 +98,7 @@ function renderThree () {
 renderThree();
 
 var oneClick = document.getElementById('submit1');
+//onClick(console.log('click'));
 oneClick.addEventListener('click', vote);
 
 var twoClick = document.getElementById('submit2');
@@ -100,7 +110,7 @@ threeClick.addEventListener('click', vote);
 var voteCounter = 0;
 
 function vote(event) {
-  for (var i = 0; i < productList.length; i++) {
+  for (var i = 0; i < availForDisplay.length; i++) {
     if (availForDisplay[i].id === event.target.id && voteCounter < maxClicks) {
       availForDisplay[i].votes++;
       voteCounter++;
