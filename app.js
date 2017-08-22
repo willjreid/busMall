@@ -2,6 +2,8 @@
 
 var clicks = 0;
 
+var maxClicks = 6;
+
 function Image (imgName, imgFilePath, alt, imgId) {
   this.imgName = imgName;
   this.imgFilePath = imgFilePath;
@@ -51,8 +53,8 @@ function renderThree () {
   imgOne.src = availForDisplay[randomOne].imgFilePath;
   //imgOne.appendChild(firstImg);
   imgOne.id = availForDisplay[randomOne].id;
-  console.log(availForDisplay);
-  console.log(lastDisplayed);
+  // console.log(availForDisplay);
+  // console.log(lastDisplayed);
 
   var imgTwo = document.getElementById('submit2');
   // imgTwo.innterHTML = '';
@@ -64,8 +66,7 @@ function renderThree () {
   imgTwo.src = availForDisplay[randomTwo].imgFilePath;
   // imgTwo.appendChild(secondImg);
   imgTwo.id = availForDisplay[randomTwo].id;
-  console.log(availForDisplay);
-  console.log(lastDisplayed);
+
   //
   var imgThree = document.getElementById('submit3');
   // imgThree.innerHTML = '';
@@ -78,10 +79,12 @@ function renderThree () {
   // imgThree.appendChild(thirdImg);
   imgThree.id = availForDisplay[randomThree].id;
   lastDisplayed = [];
-  lastDisplayed.push(randomOne, randomTwo, randomThree);
-  // productList[randomOne].displayed += 1;
-  // productList[randomTwo].displayed += 1;
-  // productList[randomThree].displayed += 1;
+  lastDisplayed.push(availForDisplay[randomOne], availForDisplay[randomTwo], availForDisplay[randomThree]);
+  console.log(availForDisplay);
+  console.log(lastDisplayed);
+  availForDisplay[randomOne].imgDisplayed += 1;
+  availForDisplay[randomTwo].imgDisplayed += 1;
+  availForDisplay[randomThree].imgDisplayed += 1;
 };
 renderThree();
 
@@ -98,20 +101,20 @@ var voteCounter = 0;
 
 function vote(event) {
   for (var i = 0; i < productList.length; i++) {
-    if (productList[i].id === event.target.id && voteCounter < maxClicks) {
-      productList[i].votes++;
+    if (availForDisplay[i].id === event.target.id && voteCounter < maxClicks) {
+      availForDisplay[i].votes++;
       voteCounter++;
       renderThree();
     } else if (voteCounter === maxClicks) {
-      oneClick.removeEventListener('click', vote, true);
-      twoClick.removeEventListener('click', vote, true);
-      threeClick.removeEventListener('click', vote, true);
+      oneClick.removeEventListener('click', vote);
+      twoClick.removeEventListener('click', vote);
+      threeClick.removeEventListener('click', vote);
       var result = document.getElemetById('result');
       var theList = document.createElement('ul');
       result.appendChild(theList);
-      for (var z = 0; z < productList.length; z++) {
+      for (var z = 0; z < availForDisplay.length; z++) {
         var list = document.createElement('li');
-        list.innerText = productList[z].votes / productList[z].displayed + ' votes for the ' + productList[z].name + '.';
+        list.innerText = availForDisplay[z].votes / availForDisplay[z].imgDisplayed + ' votes for the ' + productList[z].name + '.';
         theList.appendChild(list);
       }
       break;
