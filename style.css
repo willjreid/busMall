@@ -2,6 +2,11 @@
   font: garamond;
 }
 
+input {
+  width: 200px;
+  margin: 10px;
+}
+
 .frame {
   display: inline-block;
   max-width: 75px;
@@ -18,5 +23,5 @@
 ;
 }
 #img3 {
-  b;
+;
 }

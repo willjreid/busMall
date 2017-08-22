@@ -22,7 +22,7 @@ So the user can see fresh images for every click.
 
 
 Tasks:
-1) build HTML page to show three images at ~25% width of page (DONE)
+1) build HTML page to show three images at ~25% width of page (needs formatting)
 2) add event listener to each image (DONE)
 2a) use a constructor function to build an image for page display, including the image link, image name, file path, number of times displayed, number of times clicked.
 3) organize array to display a random sample from the list (DONE)
