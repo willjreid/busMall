@@ -9,7 +9,7 @@ function Image (imgName, imgFilePath, alt, imgId) {
   this.imgId = imgId;
   this.imgDisplayed = 0;
   this.imgClicked = 0;
-  availForDisplay.push(this); // added by Mark to push into empty productList as items are created
+  //availForDisplay.push(imgId); // added by Mark to push into empty productList as items are created
 }
 
 var bag = new Image ('bag.jpg', 'images/bag.jpg', 'R2D2 rollerboard', 1);
@@ -34,61 +34,69 @@ var waterCan = new Image ('water-can.jpg', 'images/water-can.jpg', 'backwards wa
 var wineGlass = new Image ('wine-glass.jpg', 'images/wine-glass.jpg', 'diagonal wine glass', 20);
 
 //var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
-var availForDisplay = [];
+var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum];
 var lastDisplayed = [];
 
 //Mark's solution
 function renderThree () {
-  var imgOne = document.getElementById('one');
-  imgOne.innerHTML = '';
-  var firstImage = imgOne.children[0]; /// dont create every time, just reassign the child image src
+  var imgOne = document.getElementById('submit1');
+  //imgOne.innerHTML = '';
+  //var firstImage = imgOne.children[0]; /// dont create every time, just reassign the child image src
   var randomOne = Math.floor(Math.random() * availForDisplay.length);
   while (lastDisplayed.includes(randomOne)) {
     randomOne = Math.floor(Math.random() * availForDisplay.length);
   };
-  firstImg.src = availForDisplay[randomOne].path;
-  imgOne.appendChild(firstImg);
-  firstImg.id = productList[randomOne].id;
+  submit1.setAttribute('src', availForDisplay[randomOne].imgFilePath);
+  submit1.setAttribute('alt', availForDisplay[randomOne].alt);
+  imgOne.src = availForDisplay[randomOne].imgFilePath;
+  //imgOne.appendChild(firstImg);
+  imgOne.id = availForDisplay[randomOne].id;
+  console.log(availForDisplay);
+  console.log(lastDisplayed);
 
-  var imgTwo = document.getElementById('two');
-  imgTwo.innterHTML = '';
-  var secondImg = document.createElement('img'); // may not need to create an image every time.
-  var randomTwo = Math.floor(Math.random() * productList.length);
-  while (randomOne === randomTwo || lastThree.includes(randomTwo)) {
-    randomTwo = Math.floor(Math.random() * productList.length);
-  }
-  secondImg.src = productList[randomTwo].path;
-  imgTwo.appendChild(secondImg);
-  secondImg.id = productList[randomTwo].id;
-
-  var imgThree = document.getElementById('three');
-  imgThree.innerHTML = '';
-  var thirdImg = document.createelement('img');
-  var randomThree = Math.floor(Math.random() * productList.length);
-  while (randomThree === randomTwo || randomThree === randomOne || lastThree.includes(randomThree)) {
-    randomThree = Math.floor(Math.random() * productList.length);
-  }
-  thirdImg.src = productList[randomThree].path;
-  imgThree.appendChild(thirdImg);
-  thirdImg.id = productList[randomThree].path;
-  lastThree = [];
-  lastThree.push(randomOne, randomTwo, randomThree);
-  productList[randomOne].displayed += 1;
-  productList[randomTwo].displayed += 1;
-  productList[randomThree].displayed += 1;
+  var imgTwo = document.getElementById('submit2');
+  // imgTwo.innterHTML = '';
+  // var secondImg = document.createElement('img'); // may not need to create an image every time.
+  var randomTwo = Math.floor(Math.random() * availForDisplay.length);
+  while (randomOne === randomTwo || lastDisplayed.includes(randomTwo)) {
+    randomTwo = Math.floor(Math.random() * availForDisplay.length);
+  };
+  imgTwo.src = availForDisplay[randomTwo].imgFilePath;
+  // imgTwo.appendChild(secondImg);
+  imgTwo.id = availForDisplay[randomTwo].id;
+  console.log(availForDisplay);
+  console.log(lastDisplayed);
+  //
+  var imgThree = document.getElementById('submit3');
+  // imgThree.innerHTML = '';
+  // var thirdImg = document.createelement('img');
+  var randomThree = Math.floor(Math.random() * availForDisplay.length);
+  while (randomThree === randomTwo || randomThree === randomOne || lastDisplayed.includes(randomThree)) {
+    randomThree = Math.floor(Math.random() * availForDisplay.length);
+  };
+  imgThree.src = availForDisplay[randomThree].imgFilePath;
+  // imgThree.appendChild(thirdImg);
+  imgThree.id = availForDisplay[randomThree].id;
+  lastDisplayed = [];
+  lastDisplayed.push(randomOne, randomTwo, randomThree);
+  // productList[randomOne].displayed += 1;
+  // productList[randomTwo].displayed += 1;
+  // productList[randomThree].displayed += 1;
 };
 renderThree();
 
-var oneClick = document.getElementById('one');
+var oneClick = document.getElementById('submit1');
 oneClick.addEventListener('click', vote);
 
-var twoClick = document.getElementById('two');
-...
+var twoClick = document.getElementById('submit2');
+twoClick.addEventListener('click', vote);
+
+var threeClick = document.getElementById('submit3');
+threeClick.addEventListener('click', vote);
 
 var voteCounter = 0;
 
 function vote(event) {
-  event.preventDefault();
   for (var i = 0; i < productList.length; i++) {
     if (productList[i].id === event.target.id && voteCounter < maxClicks) {
       productList[i].votes++;
@@ -112,46 +120,46 @@ function vote(event) {
 };
 //end Mark's solution
 
-function callRandomImage() {
-  var position = Math.floor(Math.random() * availForDisplay.length); //need to update so availForDisplay array's contents persist after function imageTracker runs
-  return position;
-}
-
-var image1 = 0;
-var image2 = 1;
-var image3 = 2;
-
-function imageTracker() {
-  image1 = callRandomImage();
-  lastDisplayed = [];
-  lastDisplayed.push(availForDisplay[image1]);
-  availForDisplay.splice((image1 + 0), 1);
-
-  image2 = callRandomImage();
-  lastDisplayed.push(availForDisplay[image2]);
-  availForDisplay.splice((image2 + 0), 1);
-
-  image3 = callRandomImage();
-  lastDisplayed.push(availForDisplay[image3]);
-  availForDisplay.splice((image3 + 0), 1);
-
-  return availForDisplay;
-};
-
-var submit1 = document.getElementById('submit1');
-
-imageTracker();
-submit1.setAttribute('src', lastDisplayed[0].imgFilePath);
-submit1.setAttribute('alt', lastDisplayed[0].alt);
-
-submit2.setAttribute('src', lastDisplayed[1].imgFilePath);
-submit2.setAttribute('alt', lastDisplayed[1].alt);
-
-submit3.setAttribute('src', lastDisplayed[2].imgFilePath);
-submit3.setAttribute('alt', lastDisplayed[2].alt);
-
-function displayNewImages (event) {
-  event.preventDefault();
-  var form = event.target;
-}
+// function callRandomImage() {
+//   var position = Math.floor(Math.random() * availForDisplay.length); //need to update so availForDisplay array's contents persist after function imageTracker runs
+//   return position;
+// }
+//
+// var image1 = 0;
+// var image2 = 1;
+// var image3 = 2;
+//
+// function imageTracker() {
+//   image1 = callRandomImage();
+//   lastDisplayed = [];
+//   lastDisplayed.push(availForDisplay[image1]);
+//   availForDisplay.splice((image1 + 0), 1);
+//
+//   image2 = callRandomImage();
+//   lastDisplayed.push(availForDisplay[image2]);
+//   availForDisplay.splice((image2 + 0), 1);
+//
+//   image3 = callRandomImage();
+//   lastDisplayed.push(availForDisplay[image3]);
+//   availForDisplay.splice((image3 + 0), 1);
+//
+//   return availForDisplay;
+// };
+//
+// var submit1 = document.getElementById('submit1');
+//
+// imageTracker();
+// submit1.setAttribute('src', lastDisplayed[0].imgFilePath);
+// submit1.setAttribute('alt', lastDisplayed[0].alt);
+//
+// submit2.setAttribute('src', lastDisplayed[1].imgFilePath);
+// submit2.setAttribute('alt', lastDisplayed[1].alt);
+//
+// submit3.setAttribute('src', lastDisplayed[2].imgFilePath);
+// submit3.setAttribute('alt', lastDisplayed[2].alt);
+//
+// function displayNewImages (event) {
+//   event.preventDefault();
+//   var form = event.target;
+// }
   //associate click with Image constructor that received the click
