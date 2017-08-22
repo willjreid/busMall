@@ -11,7 +11,7 @@ function Image (imgName, imgFilePath, alt, imgId) {
   this.imgClicked = 0;
 }
 
-var bag = new Image ('bag.jpg', 'images/bag.jpg', 'R2D2 rollerboard'1);
+var bag = new Image ('bag.jpg', 'images/bag.jpg', 'R2D2 rollerboard', 1);
 var banana = new Image ('banana.jpg', 'images/banana.jpg', 'banana slicer', 2);
 var bathroom = new Image ('bathroom.jpg', 'images/bathroom.jpg', 'TP stand', 3);
 var boots = new Image ('boots.jpg', 'images/boots.jpg', 'open-toe boots', 4);
@@ -40,15 +40,44 @@ function callRandomImage() {
   var position = Math.floor(Math.random() * availForDisplay.length);
   return position;
 }
+var image1 = 0;
+var image2 = 1;
+var image3 = 2;
+
+function imageTracker() {
+  console.log(availForDisplay);
+  console.log(lastDisplayed);
+  image1 = callRandomImage();
+  console.log(image1);
+  availForDisplay.splice(image1, 1);
+  lastDisplayed.push(image1);
+  console.log(availForDisplay);
+  console.log(lastDisplayed);
+  image2 = callRandomImage();
+  availForDisplay.splice(image2, 1);
+  lastDisplayed.push(image2);
+  image3 = callRandomImage();
+  availForDisplay.splice(image3, 1);
+  lastDisplayed.push(image3);
+}
 
 var submit1 = document.getElementById('submit1');
-submit1.setAttribute('src', availForDisplay[callRandomImage()].imgFilePath);
+imageTracker();
+submit1.setAttribute('src', availForDisplay[image1].imgFilePath);
+submit2.setAttribute('src', availForDisplay[image2].imgFilePath);
+submit3.setAttribute('src', availForDisplay[image3].imgFilePath);
 
 var submit2 = document.getElementById('submit2');
-submit2.setAttribute('src', availForDisplay[callRandomImage()].imgFilePath);
+imageTracker();
+submit1.setAttribute('src', availForDisplay[image1].imgFilePath);
+submit2.setAttribute('src', availForDisplay[image2].imgFilePath);
+submit3.setAttribute('src', availForDisplay[image3].imgFilePath);
 
 var submit3 = document.getElementById('submit3');
-submit3.setAttribute('src', availForDisplay[callRandomImage()].imgFilePath);
+imageTracker();
+submit1.setAttribute('src', availForDisplay[image1].imgFilePath);
+submit2.setAttribute('src', availForDisplay[image2].imgFilePath);
+submit3.setAttribute('src', availForDisplay[image3].imgFilePath);s
 
 function displayNewImages (event) {
   event.preventDefault();
