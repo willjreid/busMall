@@ -9,6 +9,7 @@ function Image (imgName, imgFilePath, alt, imgId) {
   this.imgId = imgId;
   this.imgDisplayed = 0;
   this.imgClicked = 0;
+  availForDisplay.push(this); // added by Mark to push into empty productList as items are created
 }
 
 var bag = new Image ('bag.jpg', 'images/bag.jpg', 'R2D2 rollerboard', 1);
@@ -32,8 +33,84 @@ var usb = new Image ('usb.gif', 'images/usb.gif', 'wiggling USB tail', 18);
 var waterCan = new Image ('water-can.jpg', 'images/water-can.jpg', 'backwards watering can', 19);
 var wineGlass = new Image ('wine-glass.jpg', 'images/wine-glass.jpg', 'diagonal wine glass', 20);
 
-var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+//var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+var availForDisplay = [];
 var lastDisplayed = [];
+
+//Mark's solution
+function renderThree () {
+  var imgOne = document.getElementById('one');
+  imgOne.innerHTML = '';
+  var firstImage = imgOne.children[0]; /// dont create every time, just reassign the child image src
+  var randomOne = Math.floor(Math.random() * availForDisplay.length);
+  while (lastDisplayed.includes(randomOne)) {
+    randomOne = Math.floor(Math.random() * availForDisplay.length);
+  };
+  firstImg.src = availForDisplay[randomOne].path;
+  imgOne.appendChild(firstImg);
+  firstImg.id = productList[randomOne].id;
+
+  var imgTwo = document.getElementById('two');
+  imgTwo.innterHTML = '';
+  var secondImg = document.createElement('img'); // may not need to create an image every time.
+  var randomTwo = Math.floor(Math.random() * productList.length);
+  while (randomOne === randomTwo || lastThree.includes(randomTwo)) {
+    randomTwo = Math.floor(Math.random() * productList.length);
+  }
+  secondImg.src = productList[randomTwo].path;
+  imgTwo.appendChild(secondImg);
+  secondImg.id = productList[randomTwo].id;
+
+  var imgThree = document.getElementById('three');
+  imgThree.innerHTML = '';
+  var thirdImg = document.createelement('img');
+  var randomThree = Math.floor(Math.random() * productList.length);
+  while (randomThree === randomTwo || randomThree === randomOne || lastThree.includes(randomThree)) {
+    randomThree = Math.floor(Math.random() * productList.length);
+  }
+  thirdImg.src = productList[randomThree].path;
+  imgThree.appendChild(thirdImg);
+  thirdImg.id = productList[randomThree].path;
+  lastThree = [];
+  lastThree.push(randomOne, randomTwo, randomThree);
+  productList[randomOne].displayed += 1;
+  productList[randomTwo].displayed += 1;
+  productList[randomThree].displayed += 1;
+};
+renderThree();
+
+var oneClick = document.getElementById('one');
+oneClick.addEventListener('click', vote);
+
+var twoClick = document.getElementById('two');
+...
+
+var voteCounter = 0;
+
+function vote(event) {
+  event.preventDefault();
+  for (var i = 0; i < productList.length; i++) {
+    if (productList[i].id === event.target.id && voteCounter < maxClicks) {
+      productList[i].votes++;
+      voteCounter++;
+      renderThree();
+    } else if (voteCounter === maxClicks) {
+      oneClick.removeEventListener('click', vote, true);
+      twoClick.removeEventListener('click', vote, true);
+      threeClick.removeEventListener('click', vote, true);
+      var result = document.getElemetById('result');
+      var theList = document.createElement('ul');
+      result.appendChild(theList);
+      for (var z = 0; z < productList.length; z++) {
+        var list = document.createElement('li');
+        list.innerText = productList[z].votes / productList[z].displayed + ' votes for the ' + productList[z].name + '.';
+        theList.appendChild(list);
+      }
+      break;
+    }
+  }
+};
+//end Mark's solution
 
 function callRandomImage() {
   var position = Math.floor(Math.random() * availForDisplay.length); //need to update so availForDisplay array's contents persist after function imageTracker runs
