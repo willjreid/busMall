@@ -32,78 +32,49 @@ var usb = new Image ('usb.gif', 'images/usb.gif', 'wiggling USB tail', 18);
 var waterCan = new Image ('water-can.jpg', 'images/water-can.jpg', 'backwards watering can', 19);
 var wineGlass = new Image ('wine-glass.jpg', 'images/wine-glass.jpg', 'diagonal wine glass', 20);
 
-//var allImages = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
-var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum]; //testing by limiting to 6 options
+var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 var lastDisplayed = [];
 
 function callRandomImage() {
-  var position = Math.floor(Math.random() * 3); //testing by changing availForDisplay.length to 3
+  var position = Math.floor(Math.random() * availForDisplay.length); //need to update so availForDisplay array's contents persist after function imageTracker runs
   return position;
 }
-//availForDisplay.length
+
 var image1 = 0;
 var image2 = 1;
 var image3 = 2;
 
 function imageTracker() {
-  //console.log(availForDisplay);
-  //console.log(lastDisplayed);
   image1 = callRandomImage();
-  console.log(position);
-  //console.log(image1);
   lastDisplayed = [];
   lastDisplayed.push(availForDisplay[image1]);
   availForDisplay.splice((image1 + 0), 1);
+
   image2 = callRandomImage();
-  console.log(position);
   lastDisplayed.push(availForDisplay[image2]);
   availForDisplay.splice((image2 + 0), 1);
 
   image3 = callRandomImage();
-  console.log(position);
   lastDisplayed.push(availForDisplay[image3]);
   availForDisplay.splice((image3 + 0), 1);
-  console.log(availForDisplay);
-  console.log(lastDisplayed);
-  //
-}
+
+  return availForDisplay;
+};
 
 var submit1 = document.getElementById('submit1');
-//console.log(lastDisplayed);
-//console.log(availForDisplay);
-//console.log(image1);
+
 imageTracker();
 submit1.setAttribute('src', lastDisplayed[0].imgFilePath);
 submit1.setAttribute('alt', lastDisplayed[0].alt);
-//console.log(lastDisplayed);
-//console.log(availForDisplay);
 
-// var submit2 = document.getElementById('submit2');
-// console.log(lastDisplayed);
-// console.log(availForDisplay);
-// console.log(image2);
-// imageTracker();
 submit2.setAttribute('src', lastDisplayed[1].imgFilePath);
 submit2.setAttribute('alt', lastDisplayed[1].alt);
-// console.log(lastDisplayed);
-// console.log(availForDisplay);
-//
-// var submit3 = document.getElementById('submit3');
-// console.log(lastDisplayed);
-// console.log(availForDisplay);
-// console.log(image2);
-// imageTracker();
+
 submit3.setAttribute('src', lastDisplayed[2].imgFilePath);
 submit3.setAttribute('alt', lastDisplayed[2].alt);
-// console.log(lastDisplayed);
-// console.log(availForDisplay);
 
 function displayNewImages (event) {
   event.preventDefault();
   var form = event.target;
-
-  //associate click with Image constructor that received the click
-  //clear out things in lastDisplayed array
-  //display three new images
-  //add new images to page
 }
+  //associate click with Image constructor that received the click
