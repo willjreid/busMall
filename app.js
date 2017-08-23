@@ -65,11 +65,11 @@ function renderThree () {
   lastDisplayed.push(availForDisplay[randomOne], availForDisplay[randomTwo], availForDisplay[randomThree]);
 
   availForDisplay[randomOne].imgDisplayed++;
-  console.log(availForDisplay[randomOne]);
+  //console.log(availForDisplay[randomOne]);
   availForDisplay[randomTwo].imgDisplayed++;
-  console.log(availForDisplay[randomTwo]);
+  //console.log(availForDisplay[randomTwo]);
   availForDisplay[randomThree].imgDisplayed++;
-  console.log(availForDisplay[randomThree]);
+  //console.log(availForDisplay[randomThree]);
   voteCounter++;
 
 };
@@ -79,25 +79,42 @@ var aClick = document.getElementById('theForm');
 aClick.addEventListener('click', vote);
 
 function vote(event) {
+  event.preventDefault();
+  renderThree();
   console.log(voteCounter);
   console.log(availForDisplay);
-  event.preventDefault();
-  for (var i = 0; i < availForDisplay.length; i++) {
-    if (availForDisplay[i].alt === event.target.alt && voteCounter < maxClicks) {
-      availForDisplay[i].imgClicked++;
-      renderThree();
-    } else if (voteCounter === maxClicks) {
-      aClick.removeEventListener('click', vote);
-      var theResult = document.getElementById('result');
-
-      var theList = document.createElement('ul');
-      for (var z = 0; z < availForDisplay.length; z++) {
-        var list = document.createElement('li');
-        list.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + availForDisplay[z].name + '.';
-        theList.appendChild(list);
-        theResult.appendChild(theList); //review appending
+  if(voteCounter < maxClicks) {
+    renderThree();
+    for (var i = 0; i < availForDisplay.length; i++) {
+      if (availForDisplay[i].link === imageSrc) {
+        availForDisplay[i].imgClicked++;
       }
-      break;
     }
   }
+  else
+  //remove event listener
+};
+
+  //increase the clicked count for which-ever image was clicked on by 1
+  //when voteCounter hits maxClicks, remove event listener
+
+//for (var i = 0; )
+  // for (var i = 0; i < maxClicks; i++) {
+  //   if (availForDisplay[i].alt === event.target.alt && voteCounter < maxClicks) {
+  //     availForDisplay[i].imgClicked++;
+  //     renderThree();
+  //   } else if (voteCounter > maxClicks) {
+  //     console.log('hit max');
+      // aClick.removeEventListener('click', vote);
+      // var theResult = document.getElementById('result');
+      // var theList = document.createElement('ul');
+      // for (var z = 0; z < availForDisplay.length; z++) {
+      //   var row = document.createElement('li');
+      //   row.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + availForDisplay[z].name + '.';
+      //   theList.appendChild(row);
+      //   theResult.appendChild(theList); //review appending
+      //}
+    //  break;
+  //   }
+  // }
 };
