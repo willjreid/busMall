@@ -5,3 +5,8 @@ This project was delivered for CodeFellows 201 on behalf of client Bus Mall.  Bu
 
 ## For Developers
 This project consists of an HTML framework to display three images at a time, based on a hard-coded product catalog listed and called from a javascript file.  The constructor requires a product name, a path to the file that is its image, and an id.
+
+
+Driver: Sean
+Navigator: Will
+We developed a local storage on his image maker. 
