@@ -1,7 +1,5 @@
 'use strict';
 
-var clicks = 0;
-
 var maxClicks = 6;
 
 function Image (imgName, imgFilePath, alt, imgId) {
@@ -64,15 +62,17 @@ function renderThree () {
   };
   imgThree.src = availForDisplay[randomThree].imgFilePath;
   imgThree.alt = availForDisplay[randomThree].alt;
-
   lastDisplayed = [];
   lastDisplayed.push(availForDisplay[randomOne], availForDisplay[randomTwo], availForDisplay[randomThree]);
-  console.log(availForDisplay);
-  console.log(lastDisplayed);
-  availForDisplay[randomOne].imgDisplayed += 1;
-  availForDisplay[randomTwo].imgDisplayed += 1;
-  availForDisplay[randomThree].imgDisplayed += 1;
-  console.log(voteCounter);
+
+  availForDisplay[randomOne].imgDisplayed++;
+  console.log(availForDisplay[randomOne]);
+  availForDisplay[randomTwo].imgDisplayed++;
+  console.log(availForDisplay[randomTwo]);
+  availForDisplay[randomThree].imgDisplayed++;
+  console.log(availForDisplay[randomThree]);
+  voteCounter++;
+
 };
 renderThree();
 
@@ -80,21 +80,21 @@ var aClick = document.getElementById('theForm');
 aClick.addEventListener('click', vote);
 
 function vote(event) {
+  console.log('wat');
+  event.preventDefault();
   for (var i = 0; i < availForDisplay.length; i++) {
     if (availForDisplay[i].alt === event.target.alt && voteCounter < maxClicks) {
       availForDisplay[i].imgClicked++;
-      voteCounter++;
       renderThree();
+      //voteCounter++;
     } else if (voteCounter === maxClicks) {
       aClick.removeEventListener('click', vote);
-      // twoClick.removeEventListener('click', vote);
-      // threeClick.removeEventListener('click', vote);
-      var result = document.getElemetById('result');
+      var result = document.getElementById('result');
       var theList = document.createElement('ul');
       result.appendChild(theList);
       for (var z = 0; z < availForDisplay.length; z++) {
         var list = document.createElement('li');
-        list.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + productList[z].name + '.';
+        result.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + productList[z].name + '.';
         theList.appendChild(list);
       }
       break;
