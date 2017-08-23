@@ -1,5 +1,7 @@
 'use strict';
 
+var totalClicks = 0;
+var maxClicks = 5;
 //make a constructor function for all items we are selling
 function Item (name, filePath, id) {
   this.name = name;
@@ -12,9 +14,9 @@ function Item (name, filePath, id) {
 var allItems = []; // array to hold all of our Item instances
 
 //need a new item for every image in the imgs directory
-var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum'];
-var paths = ['images/bag.jpg', 'images/banana.jpg', 'images/bathroom.jpg', 'images/boots.jpg', 'images/breakfast.jpg', 'images/bubblegum.jpg'];
-var ids = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg'];
+var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var paths = ['images/bag.jpg', 'images/banana.jpg', 'images/bathroom.jpg', 'images/boots.jpg', 'images/breakfast.jpg', 'images/bubblegum.jpg', 'images/chair.jpg', 'images/cthulhu.jpg', 'images/dog-duck.jpg', 'images/dragon.jpg', 'images/pen.jpg', 'images/pet-sweep.jpg', 'images/scissors.jpg', 'images/shark.jpg', 'images/sweep.png', 'images/tauntaun.jpg', 'images/unicorn.jpg', 'images/usb.gif', 'images/water-can.jpg', 'images/wine-glass.jpg'];
+var ids = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 function createItems () {
   for (var i = 0 ; i < names.length; i++) {
@@ -42,6 +44,7 @@ function makeThreeImages() {
       allItems[indexNum].timesShown++; // increase number of times shown for the Item instanc we've selected
       var linkedImage = document.getElementById('image-' + i);
       linkedImage.setAttribute('src', allItems[indexNum].filePath);
+      linkedImage.setAttribute('itemIdx', indexNum);
     }
   }
   //assign lastRound to thisRound so current set of numbers is reserved
@@ -51,7 +54,35 @@ function makeThreeImages() {
 makeThreeImages();
 
 //add an event listener to eveyr img tag
-for (var i = 0; i < document.getElementByClassName('clickable').length; i++) {
+for (var i = 0; i < document.getElementsByClassName('clickable').length; i++) {
   var image = document.getElementById('image-' + (i + 1));
   image.addEventListener('click', onClick);
 }
+
+function onClick(event) {
+  var itemIdx = parseInt(event.target.getAttribute('itemIdx'));
+  var itemIWant = allItems[itemIdx];
+  itemIWant.timesClicked++;
+  makeThreeImages();
+  totalClicks++;
+  if (totalClicks === maxClicks) {
+    for (var i = 0; i < document.getElementsByClassName('clickable').length; i++) {
+      var image = document.getElementById('image-' + (i + 1));
+      image.removeEventListener('click', onClick);
+    }
+    var list = document.getElementById('list');
+    for (var j = 0; j < allItems.length; j++); {
+      var li = document.createElement('li');
+      li.innerText = allItems[j].name + ' was clicked ' + allItems[j].timesClicked + ' times';
+      list.appendChild(li);
+    }
+  }
+}
+//
+//
+//
+//
+//
+//
+//
+//

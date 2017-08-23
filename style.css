@@ -15,3 +15,7 @@ input {
 .pic {
   max-width: 200px;
 }
+.clickable {
+  max-width: 200px;
+  max-height: 200px;
+}
