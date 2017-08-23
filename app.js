@@ -13,6 +13,7 @@ function Image (imgName, imgFilePath, alt, imgId) {
   this.imgClicked = 0;
   //availForDisplay.push(imgId); // added by Mark to push into empty productList as items are created
 }
+var voteCounter = 0;
 
 var bag = new Image ('bag.jpg', 'images/bag.jpg', 'R2D2 rollerboard', 1);
 var banana = new Image ('banana.jpg', 'images/banana.jpg', 'banana slicer', 2);
@@ -39,53 +40,30 @@ var wineGlass = new Image ('wine-glass.jpg', 'images/wine-glass.jpg', 'diagonal 
 var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum];
 var lastDisplayed = [];
 
-//Mark's solution
 function renderThree () {
   var imgOne = document.getElementById('submit1');
-  //imgOne.innerHTML = '';
-  //var firstImage = imgOne.children[0]; /// dont create every time, just reassign the child image src
   var randomOne = Math.floor(Math.random() * availForDisplay.length);
   while (lastDisplayed.includes(randomOne)) {
     randomOne = Math.floor(Math.random() * availForDisplay.length);
   };
-  submit1.setAttribute('src', availForDisplay[randomOne].imgFilePath);
-  submit1.setAttribute('alt', availForDisplay[randomOne].alt);
-  submit1.setAttribute('id', 'submit1');
   imgOne.src = availForDisplay[randomOne].imgFilePath;
-  //imgOne.appendChild(firstImg);
-  imgOne.id = availForDisplay[randomOne].id;
-  // console.log(availForDisplay);
-  // console.log(lastDisplayed);
+  imgOne.alt = availForDisplay[randomOne].alt;
 
   var imgTwo = document.getElementById('submit2');
-  // imgTwo.innterHTML = '';
-  // var secondImg = document.createElement('img'); // may not need to create an image every time.
   var randomTwo = Math.floor(Math.random() * availForDisplay.length);
   while (randomOne === randomTwo || lastDisplayed.includes(randomTwo)) {
     randomTwo = Math.floor(Math.random() * availForDisplay.length);
   };
-  submit2.setAttribute('src', availForDisplay[randomTwo].imgFilePath);
-  submit2.setAttribute('alt', availForDisplay[randomTwo].alt);
-  submit2.setAttribute('id', 'submit2');
   imgTwo.src = availForDisplay[randomTwo].imgFilePath;
-  // imgTwo.appendChild(secondImg);
-  imgTwo.id = availForDisplay[randomTwo].id;
+  imgTwo.alt = availForDisplay[randomTwo].alt;
 
-  //
   var imgThree = document.getElementById('submit3');
-  // imgThree.innerHTML = '';
-  // var thirdImg = document.createelement('img');
   var randomThree = Math.floor(Math.random() * availForDisplay.length);
   while (randomThree === randomTwo || randomThree === randomOne || lastDisplayed.includes(randomThree)) {
     randomThree = Math.floor(Math.random() * availForDisplay.length);
   };
-  // submit3.setAttribute('src', availForDisplay[randomThree].imgFilePath);
-  // submit3.setAttribute('alt', availForDisplay[randomThree].alt);
-  // submit3.setAttribute('id', 'submit3');
   imgThree.src = availForDisplay[randomThree].imgFilePath;
-  // imgThree.appendChild(thirdImg);
-  //imgThree.id = availForDisplay[randomThree].id;
-  imgThree.id = availForDisplay[randomThree].id;
+  imgThree.alt = availForDisplay[randomThree].alt;
 
   lastDisplayed = [];
   lastDisplayed.push(availForDisplay[randomOne], availForDisplay[randomTwo], availForDisplay[randomThree]);
@@ -94,44 +72,39 @@ function renderThree () {
   availForDisplay[randomOne].imgDisplayed += 1;
   availForDisplay[randomTwo].imgDisplayed += 1;
   availForDisplay[randomThree].imgDisplayed += 1;
+  console.log(voteCounter);
 };
 renderThree();
 
-var oneClick = document.getElementById('submit1');
-//onClick(console.log('click'));
-oneClick.addEventListener('click', vote);
-
-var twoClick = document.getElementById('submit2');
-twoClick.addEventListener('click', vote);
-
-var threeClick = document.getElementById('submit3');
-threeClick.addEventListener('click', vote);
-
-var voteCounter = 0;
+var aClick = document.getElementById('theForm');
+aClick.addEventListener('click', vote);
 
 function vote(event) {
   for (var i = 0; i < availForDisplay.length; i++) {
-    if (availForDisplay[i].id === event.target.id && voteCounter < maxClicks) {
-      availForDisplay[i].votes++;
+    if (availForDisplay[i].alt === event.target.alt && voteCounter < maxClicks) {
+      availForDisplay[i].imgClicked++;
       voteCounter++;
       renderThree();
     } else if (voteCounter === maxClicks) {
-      oneClick.removeEventListener('click', vote);
-      twoClick.removeEventListener('click', vote);
-      threeClick.removeEventListener('click', vote);
+      aClick.removeEventListener('click', vote);
+      // twoClick.removeEventListener('click', vote);
+      // threeClick.removeEventListener('click', vote);
       var result = document.getElemetById('result');
       var theList = document.createElement('ul');
       result.appendChild(theList);
       for (var z = 0; z < availForDisplay.length; z++) {
         var list = document.createElement('li');
-        list.innerText = availForDisplay[z].votes / availForDisplay[z].imgDisplayed + ' votes for the ' + productList[z].name + '.';
+        list.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + productList[z].name + '.';
         theList.appendChild(list);
       }
       break;
     }
   }
 };
-//end Mark's solution
+
+//canvas section:
+//var canvas = document.getElementById('canvas');
+//var ctx = canvas.getContext('2d');
 
 // function callRandomImage() {
 //   var position = Math.floor(Math.random() * availForDisplay.length); //need to update so availForDisplay array's contents persist after function imageTracker runs
