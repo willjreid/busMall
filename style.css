@@ -1,0 +1,21 @@
+* {
+  font: garamond;
+}
+
+input {
+  width: 200px;
+  margin: 10px;
+}
+
+.frame {
+  display: inline;
+  max-width: 220px;
+  margin: 20px;
+}
+.pic {
+  max-width: 200px;
+}
+.clickable {
+  max-width: 200px;
+  max-height: 200px;
+}
