@@ -69,10 +69,13 @@ function onClick(event) {
     for (var i = 0; i < document.getElementsByClassName('clickable').length; i++) {
       var image = document.getElementById('image-' + (i + 1));
       image.removeEventListener('click', onClick);
-    }
+    };
+
     var list = document.getElementById('list');
-    for (var j = 0; j < allItems.length; j++); {
+    for (var j = 0; j < allItems.length; j++) {
       var li = document.createElement('li');
+      //li.innerText = 'woo' + j;
+      console.log(allItems.length);
       li.innerText = allItems[j].name + ' was clicked ' + allItems[j].timesClicked + ' times';
       list.appendChild(li);
     }
