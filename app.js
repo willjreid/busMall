@@ -3,6 +3,12 @@
 var totalClicks = 0;
 var maxClicks = 5;
 
+if (localStorage.getItem('total')) {
+  var totalsArray = JSON.parse(localStorage.getItem('totals'));
+  }
+var allItems = [];
+
+
 function Item (name, filePath, id) {
   this.name = name;
   this.filePath = filePath;
@@ -11,7 +17,6 @@ function Item (name, filePath, id) {
   this.timesClicked = 0;
   allItems.push(this);
 }
-var allItems = [];
 
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var paths = ['images/bag.jpg', 'images/banana.jpg', 'images/bathroom.jpg', 'images/boots.jpg', 'images/breakfast.jpg', 'images/bubblegum.jpg', 'images/chair.jpg', 'images/cthulhu.jpg', 'images/dog-duck.jpg', 'images/dragon.jpg', 'images/pen.jpg', 'images/pet-sweep.jpg', 'images/scissors.jpg', 'images/shark.jpg', 'images/sweep.png', 'images/tauntaun.jpg', 'images/unicorn.jpg', 'images/usb.gif', 'images/water-can.jpg', 'images/wine-glass.jpg'];
@@ -71,9 +76,13 @@ function onClick(event) {
       var li = document.createElement('li');
       li.innerText = allItems[j].name + ' was clicked ' + allItems[j].timesClicked + ' times out of ' + allItems[j].timesShown + ' times displayed, a ' + (allItems[j].timesClicked / allItems[j].timesShown) * 100 + '% click rate.';
       list.appendChild(li);
-    }
+    };
+    localStorage.setItem('totals', JSON.stringify(allItems));
   }
 }
+
+
+
 //
 //
 //
