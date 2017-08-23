@@ -3,30 +3,19 @@
     <head>
       <meta charset='utf-8'>
       <title>Bus Mall Query Tool</title>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js' charset='utf-8'> </script>
+       <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js' charset='utf-8'> </script>
       <link href="style.css" type='text/css' rel='stylesheet'></link>
     </head>
     <body>
       <header>
         <h1>Bus Mall Customer Feedback Query</h1>
       </header>
-      <section>
-        <form id='theForm' onsubmit='redirect'; return false>
-          <div class='frame'>
-            <input type='image' id='submit1' class='pic' />
-          </div>
-          <div class='frame'>
-            <input type='image' id='submit2' class='pic' />
-          </div>
-          <div class='frame'>
-            <input type='image' id='submit3' class='pic' />
-          </div>
-          <div class='result'>
-          </div>
-        </form>
-        <div id='canvas'>
-        </div>
-      </section>
-      <script type='text/javascript' src='app.js'></script>
+      <img id='image-1' class='clickable'></img>
+      <img id='image-2' class='clickable'></img>
+      <img id='image-3' class='clickable'></img>
+      <ul id='list'>
+      </ul>
+
+      <script type='text/javascript' src='app.class.js'></script>
     </body>
   </html>

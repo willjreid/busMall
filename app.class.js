@@ -76,7 +76,7 @@ function onClick(event) {
       var li = document.createElement('li');
       //li.innerText = 'woo' + j;
       console.log(allItems.length);
-      li.innerText = allItems[j].name + ' was clicked ' + allItems[j].timesClicked + ' times';
+      li.innerText = allItems[j].name + ' was clicked ' + allItems[j].timesClicked + ' times out of ' + allItems[j].timesShown + ' times displayed, a ' + (allItems[j].timesClicked / allItems[j].timesShown) * 100 + '% click rate.';
       list.appendChild(li);
     }
   }
