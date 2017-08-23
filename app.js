@@ -9,7 +9,6 @@ function Image (imgName, imgFilePath, alt, imgId) {
   this.imgId = imgId;
   this.imgDisplayed = 0;
   this.imgClicked = 0;
-  //availForDisplay.push(imgId); // added by Mark to push into empty productList as items are created
 }
 var voteCounter = 0;
 
@@ -34,8 +33,8 @@ var usb = new Image ('usb.gif', 'images/usb.gif', 'wiggling USB tail', 18);
 var waterCan = new Image ('water-can.jpg', 'images/water-can.jpg', 'backwards watering can', 19);
 var wineGlass = new Image ('wine-glass.jpg', 'images/wine-glass.jpg', 'diagonal wine glass', 20);
 
-//var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
-var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum];
+var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+//var availForDisplay = [bag, banana, bathroom, boots, breakfast, bubblegum];
 var lastDisplayed = [];
 
 function renderThree () {
@@ -80,72 +79,25 @@ var aClick = document.getElementById('theForm');
 aClick.addEventListener('click', vote);
 
 function vote(event) {
-  console.log('wat');
+  console.log(voteCounter);
+  console.log(availForDisplay);
   event.preventDefault();
   for (var i = 0; i < availForDisplay.length; i++) {
     if (availForDisplay[i].alt === event.target.alt && voteCounter < maxClicks) {
       availForDisplay[i].imgClicked++;
       renderThree();
-      //voteCounter++;
     } else if (voteCounter === maxClicks) {
       aClick.removeEventListener('click', vote);
-      var result = document.getElementById('result');
+      var theResult = document.getElementById('result');
+
       var theList = document.createElement('ul');
-      result.appendChild(theList);
       for (var z = 0; z < availForDisplay.length; z++) {
         var list = document.createElement('li');
-        result.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + productList[z].name + '.';
+        list.innerText = availForDisplay[z].imgClicked / availForDisplay[z].imgDisplayed + ' votes for the ' + availForDisplay[z].name + '.';
         theList.appendChild(list);
+        theResult.appendChild(theList); //review appending
       }
       break;
     }
   }
 };
-
-//canvas section:
-//var canvas = document.getElementById('canvas');
-//var ctx = canvas.getContext('2d');
-
-// function callRandomImage() {
-//   var position = Math.floor(Math.random() * availForDisplay.length); //need to update so availForDisplay array's contents persist after function imageTracker runs
-//   return position;
-// }
-//
-// var image1 = 0;
-// var image2 = 1;
-// var image3 = 2;
-//
-// function imageTracker() {
-//   image1 = callRandomImage();
-//   lastDisplayed = [];
-//   lastDisplayed.push(availForDisplay[image1]);
-//   availForDisplay.splice((image1 + 0), 1);
-//
-//   image2 = callRandomImage();
-//   lastDisplayed.push(availForDisplay[image2]);
-//   availForDisplay.splice((image2 + 0), 1);
-//
-//   image3 = callRandomImage();
-//   lastDisplayed.push(availForDisplay[image3]);
-//   availForDisplay.splice((image3 + 0), 1);
-//
-//   return availForDisplay;
-// };
-//
-// var submit1 = document.getElementById('submit1');
-//
-// imageTracker();
-// submit1.setAttribute('src', lastDisplayed[0].imgFilePath);
-// submit1.setAttribute('alt', lastDisplayed[0].alt);
-//
-// submit2.setAttribute('src', lastDisplayed[1].imgFilePath);
-// submit2.setAttribute('alt', lastDisplayed[1].alt);
-//
-// submit3.setAttribute('src', lastDisplayed[2].imgFilePath);
-// submit3.setAttribute('alt', lastDisplayed[2].alt);
-//
-// function displayNewImages (event) {
-//   event.preventDefault();
-//   var form = event.target;
-// }
-  //associate click with Image constructor that received the click
