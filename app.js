@@ -1,7 +1,7 @@
 'use strict';
 
 var totalClicks = 0;
-var maxClicks = 5;
+var maxClicks = 25;
 
 function Item (name, filePath, id) {
   this.name = name;
@@ -73,6 +73,9 @@ function onClick(event) {
       list.appendChild(li);
     }
   }
+}
+function drawChart() {
+
 }
 //
 //

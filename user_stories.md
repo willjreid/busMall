@@ -8,6 +8,14 @@ As a prospective customer
 I want to be able to review three products at a time and click on the item I would most like to purchase, then see a new set of images
 So I can compare items in a relevant sample size.
 
+As a prospective customer
+I want to see my survey in a styled page featuring a custom font
+So I know that BusMall is a professional organization.
+
+As a prospective customer
+I would like to see my results encorporated in a chart
+So I understand the relative popularity of items in an easily-diguestable format.
+
 As a BusMall supplier
 I want focus group members to see a random sample of products for 25 iterations
 So I can draw conclusions about which products they prefer
@@ -19,6 +27,10 @@ So I can gauge the relative attractiveness of features.
 As a BusMall supplier
 I want to ensure that the same item does not appear on two pages in a row by tracking an attribute called lastDisplayed
 So the user can see fresh images for every click.
+
+As a BusMall supplier
+I want to see data represented in list and charts if possible
+So I can have context for the relative popularity of items.
 
 
 Tasks:
