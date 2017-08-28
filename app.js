@@ -54,6 +54,8 @@ for (var i = 0; i < document.getElementsByClassName('clickable').length; i++) {
   image.addEventListener('click', onClick);
 }
 
+var itemClicks = [];
+
 function onClick(event) {
   var itemIdx = parseInt(event.target.getAttribute('itemIdx'));
   var itemIWant = allItems[itemIdx];
@@ -74,9 +76,89 @@ function onClick(event) {
     }
   }
 }
-function drawChart() {
+var itemClicks = [];
+for (var j = 0; j < allItems.length; j++) {
+  itemClicks.push(allItems[j].timesClicked);
+};
 
-}
+// function drawChart() {
+//
+// }
+var chartConfig = {
+  type: 'bar',
+  data: { itemClicks;
+    labels: allItems, // x-axis labels for every entry in your data set. It should match up with the number of things you're plotting (if it's a bar chart)
+    datasets: [{ // <-- notice that this can be an array of multiple data sets.
+      // each data set is its own object literal.
+      label: '# of Votes', // <-- the label of this one data set
+      data: [12, 19, 3, 5, 2, 3], // <-- where your data actually goes. just the numbers
+      backgroundColor: [ // <-- this can be either one single color or a color for each item in your bar chart.
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+      ],
+      borderWidth: 5 // border width in pixels
+    }]
+  },
+  options: {
+    // maintainAspectRatio: false,
+    // animation: {
+    //   duration: 1000
+    // },
+    title: {
+      display: true,
+      text: 'An important chart'
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
+  }
+};
+
+var myChart = new Chart(ctx, chartConfig);
 //
 //
 //
