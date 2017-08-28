@@ -86,8 +86,8 @@ for (var j = 0; j < allItems.length; j++) {
 // }
 var chartConfig = {
   type: 'bar',
-  data: { itemClicks;
-    labels: allItems, // x-axis labels for every entry in your data set. It should match up with the number of things you're plotting (if it's a bar chart)
+  data: { itemClicks
+    labels: allItems // x-axis labels for every entry in your data set. It should match up with the number of things you're plotting (if it's a bar chart)
     datasets: [{ // <-- notice that this can be an array of multiple data sets.
       // each data set is its own object literal.
       label: '# of Votes', // <-- the label of this one data set
